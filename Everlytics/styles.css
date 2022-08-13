@@ -1,3 +1,11 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 .container {
   margin: 10%;
   display: -webkit-flex;
@@ -13,16 +21,19 @@
   border: 1px solid;
   font-size: 18px;
   padding: 3vh 0;
-  width: 50%;
 }
 
 .form-input {
-  padding: 5%;
+  padding: 5% 2% 5% 0%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  width: 100%;
+}
+
+.clear {
+  clear: both;
 }
 
 .text-field {
@@ -36,24 +47,20 @@ label {
 }
 
 input[type="text"] {
-  max-width: 50rem;
-  min-width: 30%;
   margin-left: 0.4rem;
   width: 100%;
-  padding: 10px 10px;
+  padding: 14px 15px;
   border: none;
-  color: #c0c0c0;
+  color: #000000;
   background-color: #f3f3f3;
 }
 
 select {
-  max-width: 50%;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
   font-size: 17px;
   float: right;
-  /* margin-left: 0.4rem; */
   width: 100%;
 }
 
@@ -76,7 +83,7 @@ p {
 }
 
 .btn {
-  margin-top: 10px;
+  margin-top: 10%;
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: center;
@@ -93,6 +100,9 @@ input[type="button"] {
   font-weight: lighter;
 }
 
+.float-right {
+  width: 100%;
+}
 select {
   border: none;
 }
@@ -103,4 +113,12 @@ input[type="submit"] {
   background-color: #6fa8dc;
   font-size: 18px;
   font-weight: lighter;
+}
+
+.success {
+  color: #006400;
+}
+
+.error {
+  color: #ff0000;
 }

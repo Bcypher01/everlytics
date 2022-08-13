@@ -1,7 +1,7 @@
 function validate(input, inputEl) {
   valid = false;
   if (!isRequired(input)) {
-    showError(inputEl, "Cannot be empty");
+    showError(inputEl, "This field Cannot be empty");
   } else if (isValidCharacter(input)) {
     showError(inputEl, "Cannot have special characters");
   } else {
@@ -31,7 +31,7 @@ const isValidCharacter = (value) => {
 const showError = (input, message) => {
   // get the form-field element
   const formField = input.parentElement;
-  
+
   // add the error class
   formField.classList.remove("success");
   formField.classList.add("error");
@@ -41,20 +41,23 @@ const showError = (input, message) => {
   error.textContent = message;
 };
 
+const showSuccess = (input, message) => {
+  // get the form-field element
+  const formField = input.parentElement;
+
+  // add the error class
+  formField.classList.remove("error");
+  formField.classList.add("success");
+
+  // show the error message
+  const error = formField.querySelector("small");
+  error.textContent = message;
+};
+
 const checkPipeline = () => {
-  let valid = false;
   let pipeline = pipelineEl.value.trim();
 
-  if (!isRequired(pipeline)) {
-    showError(pipelineEl, "This field cannot be empty");
-    console.log("Error");
-  } else if (isValidCharacter(pipeline)) {
-    showError(pipelineEl, "This field cannot have special characters");
-  } else {
-    showSuccess(passwordEl);
-    valid = true;
-  }
-  return valid;
+  validate(pipeline, pipelineEl);
 };
 
 const checkProject = () => {
