@@ -40,12 +40,17 @@ html {
 .text-field {
   display: flex;
   flex-direction: column;
+  margin-right: 10px;
+}
+
+.width-90 {
+  width: 90% !important;
 }
 
 label {
   border-right: 1px solid;
   padding: 5px;
-  width: 50%;
+  width: 60%;
   display: inline-block;
   text-align: right;
 }
@@ -129,4 +134,7 @@ input[type="submit"] {
 
 .error {
   color: #ff0000;
+}
+
+.form-input {
 }

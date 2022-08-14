@@ -13,8 +13,10 @@ function validate(input, inputEl) {
     showError(inputEl, "This field Cannot be empty");
   } else if (!minLength(input.length)) {
     showError(inputEl, "This field cannot be less than 5 characters");
-  } else if (isValidCharacter(input)) {
+  } else if (noSpecialChar(input)) {
     showError(inputEl, "Cannot have special characters");
+  } else if (isValidChar(input)) {
+    showError(inputEl, "Cannot start with special characters");
   } else {
     showSuccess(inputEl);
     valid = true;
@@ -25,8 +27,12 @@ function validate(input, inputEl) {
 
 const isRequired = (value) => (value === "" ? false : true);
 const minLength = (length) => (length < 5 ? false : true);
-const isValidCharacter = (value) => {
-  const re = new RegExp("^(?![_|-])");
+const noSpecialChar = (value) => {
+  const re = new RegExp(/^[A-Za-z0-9 ]+$/);
+  return !re.test(value);
+};
+const isValidChar = (value) => {
+  const re = new RegExp("^(?![_|-|+])");
   return !re.test(value);
 };
 
