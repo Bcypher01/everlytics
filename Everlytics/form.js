@@ -9,6 +9,25 @@ const form = document.querySelector("#form");
 
 function validate(input, inputEl) {
   valid = false;
+  // switch (valid) {
+  //   case isRequired:
+  //     showError(inputEl, "This field Cannot be empty");
+  //     break;
+  //   case minLength:
+  //     showError(inputEl, "This field cannot be less than 5 characters");
+  //     break;
+  //   case noSpecialChar:
+  //     showError(inputEl, "Cannot have special characters");
+  //     break;
+  //   case isValidChar:
+  //     showError(inputEl, "Cannot start with special characters");
+  //     break;
+
+  //   default:
+  //     showSuccess(inputEl);
+  //     valid = true;
+  //     break;
+  // }
   if (!isRequired(input)) {
     showError(inputEl, "This field Cannot be empty");
   } else if (!minLength(input.length)) {

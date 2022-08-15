@@ -1,35 +1,14 @@
-[
-  [
-    "machine_name",
-    "machine_id",
-    "current",
-    "voltage",
-    "power_factor",
-    "active_power",
-    "apparent_power",
-    "reactive_power",
-    "daily_energy",
-    "monthly_energy",
-    "yearly_energy",
-    "idle_daily",
-    "idle_monthly",
-    "idle_yearly"
+{
+  "machine_name": ["Auto Winding Machine", "Boiler Machine"],
+  "machine_id": ["machine001", "machine002"],
+  "energy_consumption(kWh)": [
+    { "Today": [0, 0], "MTD": [0, 0], "YTD": [0, 0] }
   ],
-  [
-    "Auto Winding Machine",
-    "machine001",
-    0,
-    0,
-    0,
-    0.0,
-    0.0,
-    0.0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-  ],
-  ["Boiler Machine", "machine004", 0, 0, 0, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0]
-]
+  "active_power(MW)": [0, 0],
+  "apparent_power(MVA)": [0, 0],
+  "reactive_power(MVAr)": [0, 0],
+  "current(Amps)": [0, 0],
+  "voltage(Volts)": [0, 0],
+  "power_factor": [0, 0],
+  "idle_time": [{ "Today": [0, 0], "MTD": [0, 0], "YTD": [0, 0] }]
+}
