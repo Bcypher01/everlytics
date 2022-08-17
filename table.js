@@ -25,16 +25,14 @@ function loadTable() {
     th.innerHTML = k.replace(/_/g, " ");
     tr.appendChild(th);
 
-    if (!Array.isArray(obj[k])) {
-      // console.log(obj[k]);
+    let data = obj[k];
 
-      // tr = table.insertRow(-1);
-      // var tabCell = tr.insertCell(-1);
-      // tabCell.innerHTML = obj[k];
-      Object.keys(obj[k]).map((j) => {
+    if (!Array.isArray(data)) {
+      let tr = table.insertRow(-1);
+      Object.keys(data).map((j) => {
         console.log(j);
-        for (let i = 0; i < obj[k].length; i++) {
-          const element = obj[k][j];
+        for (let i = 0; i < data[j].length; i++) {
+          const element = data[j][i];
           console.log(element);
         }
       });
