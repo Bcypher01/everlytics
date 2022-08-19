@@ -1,56 +1,39 @@
-function loadTable() {
-  let data = [
-    {
-      machine_name: ["Auto Winding Machine", "Boiler Machine"],
-      machine_id: ["machine001", "machine002"],
-      "energy_consumption(kWh)": { Today: [0, 0], MTD: [0, 0], YTD: [0, 0] },
-      "active_power(MW)": [0, 0],
-      "apparent_power(MVA)": [0, 0],
-      "reactive_power(MVAr)": [0, 0],
-      "current(Amps)": [0, 0],
-      "voltage(Volts)": [0, 0],
-      power_factor: [0, 0],
-      idle_time: { Today: [0, 0], MTD: [0, 0], YTD: [0, 0] },
-    },
-  ];
-  let obj = data[0];
+//Get data from server
+const getData = async () => {
+  const data = await fetch("/data.json");
+  const response = await data.json();
+  return response;
+};
 
-  const table = document.createElement("table");
+(async () => {
+  const tableRows = await getData();
+  const actualData = tableRows.slice(1);
 
-  let tr = table.insertRow(-1);
+  const pageTable = document.getElementById("pageTable");
 
-  Object.keys(obj).map((k) => {
-    console.log(k.replace(/_/g, " "));
-    const th = document.createElement("th");
-    th.innerHTML = k.replace(/_/g, " ");
-    tr.appendChild(th);
+  // Populate Table Headers.
+  const tableHead = pageTable.getElementsByTagName("thead")[0];
+  const tableHeaderRow = tableHead.insertRow();
+  const headings = tableRows[0];
 
-    let data = obj[k];
+  for (let heading of headings) {
+    const newCell = tableHeaderRow.insertCell();
+    const cellText = document.createTextNode(heading.replace(/_/g, " "));
 
-    if (!Array.isArray(data)) {
-      let tr = table.insertRow(-1);
-      Object.keys(data).map((j) => {
-        console.log(j);
-        for (let i = 0; i < data[j].length; i++) {
-          const element = data[j][i];
-          console.log(element);
-        }
-      });
-    } else {
-      let tr = table.insertRow(-1);
-      for (let i = 0; i < obj[k].length; i++) {
-        const element = obj[k][i];
+    newCell.appendChild(cellText);
+  }
 
-        // let tabCell = tr.insertCell(-1);
-        let td = document.createElement("td");
-        td.innerHTML = element;
-        tr.appendChild(td);
-        console.log(element);
-      }
+  // Populate Table Rows.
+  const tableBody = pageTable.getElementsByTagName("tbody")[0];
+
+  for (let i = 0; i < actualData.length; i++) {
+    const tr = tableBody.insertRow();
+
+    for (let cell of actualData[i]) {
+      const newCell = tr.insertCell();
+      const cellText = document.createTextNode(cell);
+
+      newCell.appendChild(cellText);
     }
-  });
-
-  const divContainer = document.getElementById("root");
-  divContainer.innerHTML = "";
-  divContainer.appendChild(table);
-}
+  }
+})();

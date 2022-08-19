@@ -7,51 +7,39 @@ const runEl = document.querySelector("#run");
 
 const form = document.querySelector("#form");
 
+//validate all form input and display error
 function validate(input, inputEl) {
   valid = false;
-  // switch (valid) {
-  //   case isRequired:
-  //     showError(inputEl, "This field Cannot be empty");
-  //     break;
-  //   case minLength:
-  //     showError(inputEl, "This field cannot be less than 5 characters");
-  //     break;
-  //   case noSpecialChar:
-  //     showError(inputEl, "Cannot have special characters");
-  //     break;
-  //   case isValidChar:
-  //     showError(inputEl, "Cannot start with special characters");
-  //     break;
+  switch (valid) {
+    case isRequired(input):
+      showError(inputEl, "This field Cannot be empty");
+      break;
+    case minLength(input.length):
+      showError(inputEl, "This field cannot be less than 5 characters");
+      break;
+    case noSpecialChar(input):
+      showError(inputEl, "Cannot start with special characters _ or -");
+      break;
+    case isValidChar(input):
+      showError(inputEl, "Cannot contain special characters");
+      break;
 
-  //   default:
-  //     showSuccess(inputEl);
-  //     valid = true;
-  //     break;
-  // }
-  if (!isRequired(input)) {
-    showError(inputEl, "This field Cannot be empty");
-  } else if (!minLength(input.length)) {
-    showError(inputEl, "This field cannot be less than 5 characters");
-  } else if (noSpecialChar(input)) {
-    showError(inputEl, "Cannot have special characters");
-  } else if (isValidChar(input)) {
-    showError(inputEl, "Cannot start with special characters");
-  } else {
-    showSuccess(inputEl);
-    valid = true;
+    default:
+      showError(inputEl, "");
+      valid = true;
+      break;
   }
-
   return valid;
 }
 
 const isRequired = (value) => (value === "" ? false : true);
 const minLength = (length) => (length < 5 ? false : true);
 const noSpecialChar = (value) => {
-  const re = new RegExp(/^[A-Za-z0-9 ]+$/);
-  return !re.test(value);
+  const re = new RegExp(/^[^_-]/);
+  return re.test(value);
 };
 const isValidChar = (value) => {
-  const re = new RegExp("^(?![_|-|+])");
+  const re = new RegExp("/^[a-zA-Z0-9-_]+$/");
   return !re.test(value);
 };
 
@@ -60,7 +48,6 @@ const showError = (input, message) => {
   const formField = input.parentElement;
 
   // add the error class
-  formField.classList.remove("success");
   formField.classList.add("error");
 
   // show the error message
@@ -68,50 +55,41 @@ const showError = (input, message) => {
   error.textContent = message;
 };
 
-const showSuccess = (input, message) => {
-  // get the form-field element
-  const formField = input.parentElement;
-
-  // add the error class
-  formField.classList.remove("error");
-  formField.classList.add("success");
-
-  // show the error message
-  const response = formField.querySelector("small");
-  response.textContent = message;
-};
-
 const checkPipeline = () => {
   let pipeline = pipelineEl.value.trim();
 
   validate(pipeline, pipelineEl);
+  return valid;
 };
 
 const checkProject = () => {
   let project = projectEl.value.trim();
-
   validate(project, projectEl);
+  return valid;
 };
 
 const checkBucket = () => {
   let bucket = bucketEl.value.trim();
-
   validate(bucket, bucketEl);
+  return valid;
 };
 
 const checkFiles = () => {
   let files = filesEl.value.trim();
   validate(files, filesEl);
+  return valid;
 };
 
 const checkCredentials = () => {
   let credentials = credentialsEl.value.trim();
   validate(credentials, credentialsEl);
+  return valid;
 };
 
 const checkRun = () => {
   let run = runEl.value.trim();
   validate(run, runEl);
+  return valid;
 };
 
 form.addEventListener("submit", function (e) {
@@ -134,7 +112,7 @@ form.addEventListener("submit", function (e) {
     isCredentialsValid &&
     isRunValid;
 
-  // submit to the server if the form is valid
+  // alert welcome if the form is valid
   if (isFormValid) {
     alert("Welcome!!!");
   }
