@@ -1,8 +1,6 @@
-//Get data from server
 const getData = async () => {
-  const data = await fetch("/data.json");
-  const response = await data.json();
-  return response;
+  const data = await fetch("./data.json");
+  return data.json();
 };
 
 (async () => {
